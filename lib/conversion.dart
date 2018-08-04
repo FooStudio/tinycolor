@@ -4,9 +4,11 @@ import 'dart:ui';
 import 'package:flutter/painting.dart';
 import 'package:meta/meta.dart';
 
+import 'hsl_color.dart';
 import 'util.dart';
 
-HSL rgbToHsl({@required double r, @required double g, @required double b}) {
+HSLColor rgbToHsl(
+    {@required double r, @required double g, @required double b}) {
   r = bound01(r, 255.0);
   g = bound01(g, 255.0);
   b = bound01(b, 255.0);
@@ -32,14 +34,14 @@ HSL rgbToHsl({@required double r, @required double g, @required double b}) {
   }
 
   h /= 6.0;
-  return HSL(h: h, s: s, l: l);
+  return HSLColor(h: h, s: s, l: l);
 }
 
-Color hslToColor(HSL hsl) {
+Color hslToColor(HSLColor hsl) {
   return hslToRgb(hsl);
 }
 
-Color hslToRgb(HSL hsl) {
+Color hslToRgb(HSLColor hsl) {
   double r;
   double g;
   double b;
@@ -80,19 +82,4 @@ double _hue2rgb(double p, double q, double t) {
   if (t < 1 / 2) return q;
   if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
   return p;
-}
-
-class HSL {
-  double h;
-  double s;
-  double l;
-  double a;
-
-  HSVColor hsvColor;
-
-  HSL({this.h, this.s, this.l, this.a = 0.0});
-
-  String toString() {
-    return "HSL(h: $h, s: $s, l: $l, a: $a)";
-  }
 }

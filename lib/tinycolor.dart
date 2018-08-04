@@ -6,7 +6,10 @@ import 'package:meta/meta.dart';
 import 'package:pigment/pigment.dart';
 
 import 'conversion.dart';
+import 'hsl_color.dart';
 import 'util.dart';
+
+export 'hsl_color.dart';
 
 class TinyColor {
   Color originalColor;
@@ -24,7 +27,7 @@ class TinyColor {
     return TinyColor(Color.fromARGB(a, r, g, b));
   }
 
-  factory TinyColor.fromHSL(HSL hsl) {
+  factory TinyColor.fromHSL(HSLColor hsl) {
     return TinyColor(hslToColor(hsl));
   }
 
@@ -66,13 +69,14 @@ class TinyColor {
     return colorToHsv(_color);
   }
 
-  HSL toHsl() {
+  HSLColor toHsl() {
     final hsl = rgbToHsl(
       r: _color.red.toDouble(),
       g: _color.green.toDouble(),
       b: _color.blue.toDouble(),
     );
-    return HSL(h: hsl.h * 360, s: hsl.s, l: hsl.l, a: _color.alpha.toDouble());
+    return HSLColor(
+        h: hsl.h * 360, s: hsl.s, l: hsl.l, a: _color.alpha.toDouble());
   }
 
   TinyColor clone() {
