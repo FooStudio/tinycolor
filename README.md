@@ -30,7 +30,7 @@ TinyColor.fromRGB(r: 255, g: 255, b:255);
 ### From HSL color
 
 ```dart
-HSLColor color = HSLColor(h: 250, s: 57, l: 30);
+HslColor color = HslColor(h: 250, s: 57, l: 30);
 TinyColor.fromHSL(color);
 ```
 

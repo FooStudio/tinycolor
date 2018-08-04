@@ -27,7 +27,7 @@ class TinyColor {
     return TinyColor(Color.fromARGB(a, r, g, b));
   }
 
-  factory TinyColor.fromHSL(HSLColor hsl) {
+  factory TinyColor.fromHSL(HslColor hsl) {
     return TinyColor(hslToColor(hsl));
   }
 
@@ -69,13 +69,13 @@ class TinyColor {
     return colorToHsv(_color);
   }
 
-  HSLColor toHsl() {
+  HslColor toHsl() {
     final hsl = rgbToHsl(
       r: _color.red.toDouble(),
       g: _color.green.toDouble(),
       b: _color.blue.toDouble(),
     );
-    return HSLColor(
+    return HslColor(
         h: hsl.h * 360, s: hsl.s, l: hsl.l, a: _color.alpha.toDouble());
   }
 

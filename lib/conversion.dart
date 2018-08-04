@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'hsl_color.dart';
 import 'util.dart';
 
-HSLColor rgbToHsl(
+HslColor rgbToHsl(
     {@required double r, @required double g, @required double b}) {
   r = bound01(r, 255.0);
   g = bound01(g, 255.0);
@@ -34,14 +34,14 @@ HSLColor rgbToHsl(
   }
 
   h /= 6.0;
-  return HSLColor(h: h, s: s, l: l);
+  return HslColor(h: h, s: s, l: l);
 }
 
-Color hslToColor(HSLColor hsl) {
+Color hslToColor(HslColor hsl) {
   return hslToRgb(hsl);
 }
 
-Color hslToRgb(HSLColor hsl) {
+Color hslToRgb(HslColor hsl) {
   double r;
   double g;
   double b;
