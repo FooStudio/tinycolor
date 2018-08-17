@@ -1,6 +1,6 @@
 name: tinycolor
 description: Flutter Color manipulation and conversion, ported from JS tinycolor2
-version: 1.0.1
+version: 1.0.2
 author: Foo() <developer@foostudio.mx>
 homepage: https://github.com/FooStudio/tinycolor
 
@@ -9,7 +9,7 @@ environment:
   flutter: ">=0.1.4 <3.0.0"
 
 dependencies:
-  pigment: ^0.1.3
+  pigment: ^1.0.3
   flutter:
     sdk: flutter
 
