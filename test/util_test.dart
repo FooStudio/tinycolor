@@ -1,4 +1,5 @@
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
+//import 'package:test/test.dart';
 import 'package:tinycolor/util.dart';
 
 void main() {
