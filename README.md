@@ -6,13 +6,13 @@ A port of [tinycolor2](https://github.com/bgrins/TinyColor) by [Brian Grinstead]
 ## Getting Started
 
 A tinycolor receives a `Color` as parameter.
-Now you can also use the package to extend the native Color class with all the same features, but simpler.
 
 ```dart
 import 'package:tinycolor/tinycolor.dart';
 
 final TinyColor = TinyColor(Colors.green);
 ```
+Now you can also use the package to extend the native Color class with all the same features, but simpler. To use extension update, make sure to change envieronment sdk version in pubspec like this: ` sdk: ">=2.6.0 <3.0.0"`
 
 ### From a Hex String
 
