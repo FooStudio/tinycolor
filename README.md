@@ -19,7 +19,7 @@ Now you can also use the package to extend the native Color class with all the s
 The package uses [Pigment](https://pub.dartlang.org/packages/pigment) by [Bregy Malpartida Ramos](https://github.com/bregydoc/) to convert strings to `Color`
 
 ````dart
-TinyColor.fromString('#FE5567';
+TinyColor.fromString('#FE5567');
 ````
 
 ### From RGB int values
@@ -240,7 +240,7 @@ Colors.red.compliment;
 
 ### mix
 
-`mix: function(toColor, amount = 10) -> TinyColor`. Returns the Complimentary Color for dynamic matching.
+`mix: function(toColor, amount = 10) -> TinyColor`. Blends the color with another color a given amount, from 0 - 100, default 50.
 
 ```dart
 TinyColor(Colors.red).mix(TinyColor(Colors.yellow, 20)).color;
