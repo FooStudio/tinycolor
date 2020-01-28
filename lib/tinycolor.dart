@@ -10,6 +10,7 @@ import 'hsl_color.dart';
 import 'util.dart';
 
 export 'hsl_color.dart';
+export 'color_extension.dart';
 
 class TinyColor {
   Color originalColor;

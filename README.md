@@ -1,5 +1,5 @@
 # tinycolor
-> TinyColor is a small library for  Flutter color manipulation and conversion
+> TinyColor is a small library for Flutter color manipulation and conversion
 
 A port of [tinycolor2](https://github.com/bgrins/TinyColor) by [Brian Grinstead](https://github.com/bgrins)
 
@@ -12,13 +12,14 @@ import 'package:tinycolor/tinycolor.dart';
 
 final TinyColor = TinyColor(Colors.green);
 ```
+Now you can also use the package to extend the native Color class with all the same features, but simpler. To use extension update, make sure to change envieronment sdk version in pubspec like this: ` sdk: ">=2.6.0 <3.0.0"`
 
 ### From a Hex String
 
 The package uses [Pigment](https://pub.dartlang.org/packages/pigment) by [Bregy Malpartida Ramos](https://github.com/bregydoc/) to convert strings to `Color`
 
 ````dart
-TinyColor.fromString('#FE5567';
+TinyColor.fromString('#FE5567');
 ````
 
 ### From RGB int values
@@ -41,11 +42,17 @@ HSVColor color = HSVColor(h: 250, s: 57, v: 30);
 TinyColor.fromHSV(color);
 ```
 
+### From Flutter's Color
+
+```dart
+TinyColor tinyColor = Colors.blue.toTinyColor();
+```
+
 ## Properties
 
 ### color
 
-Returns de flutter `Color` after operations 
+Returns the flutter `Color` after operations 
 
 ```dart
 final Color color = TinyColor(Colors.white).color;
@@ -60,6 +67,8 @@ Returns the perceived brightness of a color, from `0-255`, as defined by [Web Co
 ```dart
 TinyColor.fromString("#ffffff").getBrightness(); // 255
 TinyColor.fromString("#000000").getBrightness(); // 0
+// or with Color extension
+Colors.grey.brightness;  // 127
 ```
 
 ### isLight
@@ -69,6 +78,8 @@ Return a boolean indicating whether the color's perceived brightness is light.
 ```dart
 TinyColor.fromString("#ffffff").isLight(); // true
 TinyColor.fromString("#000000").isLight(); // false
+// or with Color extension
+Colors.white.isLight;  // true
 ```
 
 ### isDark
@@ -78,6 +89,8 @@ Return a boolean indicating whether the color's perceived brightness is dark.
 ```dart
 TinyColor.fromString("#ffffff").isDark(); // false
 TinyColor.fromString("#000000").isDark(); // true
+// or with Color extension
+Colors.white.isDark;  // false
 ```
 
 ### getLuminance
@@ -86,6 +99,8 @@ Return the perceived luminance of a color, a shorthand for flutter `Color.comput
 
 ```dart
 TinyColor.fromString("#ffffff").getLuminance();
+// or with Color extension
+Colors.white.luminance;
 ```
 
 ### setAlpha
@@ -110,6 +125,8 @@ These methods manipulate the current color, and return it for chaining. For inst
 
 ```dart
 TinyColor(Colors.red).lighten().desaturate().color;
+// or with Color extension
+Colors.red.lighten().desaturate();
 ```
 
 ### lighten
@@ -119,6 +136,8 @@ TinyColor(Colors.red).lighten().desaturate().color;
 ```dart
 TinyColor(Colors.red).lighten().color;
 TinyColor(Colors.red).lighten(100).color;
+// or with Color extension
+Colors.red.lighten(50);
 ```
 
 ### brighten
@@ -126,7 +145,9 @@ TinyColor(Colors.red).lighten(100).color;
 `brighten: function(amount = 10) -> TinyColor`. Brighten the color a given amount, from 0 to 100.
 
 ```dart
-TinyColor(Colors.white).brighten().color;'
+TinyColor(Colors.black).brighten().color;
+// or with Color extension
+Colors.black.brighten(50);
 ```
 
 ### darken
@@ -136,6 +157,8 @@ TinyColor(Colors.white).brighten().color;'
 ```dart
 TinyColor(Colors.red).darken().color;
 TinyColor(Colors.red).darken(100).color;
+// or with Color extension
+Colors.red.darken(50);
 ```
 
 ### tint
@@ -145,6 +168,8 @@ Mix the color with pure white, from 0 to 100. Providing 0 will do nothing, provi
 ```dart
 TinyColor(Color.red).tint().color;
 TinyColor(Color.red).tint(100).color;
+// or with Color extension
+Colors.red.tint(50);
 ```
 
 ### shade
@@ -154,6 +179,8 @@ Mix the color with pure black, from 0 to 100. Providing 0 will do nothing, provi
 ```dart
 TinyColor(Colors.red).shade().color;
 TinyColor(Colors.red).shade(100).color;
+// or with Color extension
+Colors.red.shade(50);
 ```
 
 ### desaturate
@@ -163,6 +190,8 @@ TinyColor(Colors.red).shade(100).color;
 ```dart
 TinyColor(Colors.red).desaturate().color;
 TinyColor(Colors.red).desaturate(100).color;
+// or with Color extension
+Colors.red.desaturate(50);
 ```
 
 ### saturate
@@ -171,6 +200,8 @@ TinyColor(Colors.red).desaturate(100).color;
 
 ```dart
 TinyColor(Colors.red).saturate().color;
+// or with Color extension
+Colors.red.saturate(50);
 ```
 
 ### greyscale
@@ -178,7 +209,9 @@ TinyColor(Colors.red).saturate().color;
 `greyscale: function() -> TinyColor`. Completely desaturates a color into greyscale. Same as calling `desaturate(100)`.
 
 ```dart
-TinyColor(Colors.red).greyscale().color;"
+TinyColor(Colors.red).greyscale().color;
+// or with Color extension
+Colors.red.greyscale;
 ```
 
 ### spin
@@ -187,10 +220,32 @@ TinyColor(Colors.red).greyscale().color;"
 
 ```dart
 TinyColor(Colors.red).spin(180).color;
+// or with Color extension
+Colors.red.spin(180);
 
 // spin(0) and spin(360) do nothing
 TinyColor(Colors.red).spin(0).color;
 TinyColor(Colors.red).spin(360).color;
+```
+
+### compliment
+
+`compliment: function() -> TinyColor`. Returns the Complimentary Color for dynamic matching.
+
+```dart
+TinyColor(Colors.red).compliment().color;
+// or with Color extension
+Colors.red.compliment;
+```
+
+### mix
+
+`mix: function(toColor, amount = 10) -> TinyColor`. Blends the color with another color a given amount, from 0 - 100, default 50.
+
+```dart
+TinyColor(Colors.red).mix(TinyColor(Colors.yellow, 20)).color;
+// or with Color extension
+Colors.red.mix(Colors.yellow, 20);
 ```
 
 ## Common operations
