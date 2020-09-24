@@ -23,8 +23,11 @@ class TinyColor {
         Color.fromARGB(color.alpha, color.red, color.green, color.blue);
   }
 
-  factory TinyColor.fromRGB(
-      {@required int r, @required int g, @required int b, int a = 100}) {
+  factory TinyColor.fromRGB({
+    // default alpha should be 255, not 100
+    // since Color.fromARGB accept alpha range values 0-255, not 0-100
+    @required int r, @required int g, @required int b, int a = 255,
+  }) {
     return TinyColor(Color.fromARGB(a, r, g, b));
   }
 
