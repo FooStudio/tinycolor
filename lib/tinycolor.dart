@@ -143,12 +143,14 @@ class TinyColor {
   }
 
   TinyColor mix({@required Color input, int amount = 50}) {
-    final int p = (amount / 100).round();
+    final double p = (amount / 100);
     final color = Color.fromARGB(
-        (input.alpha - _color.alpha) * p + _color.alpha,
-        (input.red - _color.red) * p + _color.red,
-        (input.green - _color.green) * p + _color.green,
-        (input.blue - _color.blue) * p + _color.blue);
+      ((input.alpha - _color.alpha) * p).round() + _color.alpha,
+      ((input.red - _color.red) * p).round() + _color.red,
+      ((input.green - _color.green) * p).round() + _color.green,
+      ((input.blue - _color.blue) * p).round() + _color.blue,
+    );
+    
     return TinyColor(color);
   }
 
