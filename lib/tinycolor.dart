@@ -23,8 +23,11 @@ class TinyColor {
         Color.fromARGB(color.alpha, color.red, color.green, color.blue);
   }
 
-  factory TinyColor.fromRGB(
-      {@required int r, @required int g, @required int b, int a = 100}) {
+  factory TinyColor.fromRGB({
+    // default alpha should be 255, not 100
+    // since Color.fromARGB accept alpha range values 0-255, not 0-100
+    @required int r, @required int g, @required int b, int a = 255,
+  }) {
     return TinyColor(Color.fromARGB(a, r, g, b));
   }
 
@@ -143,12 +146,14 @@ class TinyColor {
   }
 
   TinyColor mix({@required Color input, int amount = 50}) {
-    final int p = (amount / 100).round();
+    final double p = (amount / 100);
     final color = Color.fromARGB(
-        (input.alpha - _color.alpha) * p + _color.alpha,
-        (input.red - _color.red) * p + _color.red,
-        (input.green - _color.green) * p + _color.green,
-        (input.blue - _color.blue) * p + _color.blue);
+      ((input.alpha - _color.alpha) * p).round() + _color.alpha,
+      ((input.red - _color.red) * p).round() + _color.red,
+      ((input.green - _color.green) * p).round() + _color.green,
+      ((input.blue - _color.blue) * p).round() + _color.blue,
+    );
+    
     return TinyColor(color);
   }
 
