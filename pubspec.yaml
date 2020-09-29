@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   pigment: ^1.0.3
-  meta: ^1.2.2
+  meta: ^1.1.8
   flutter:
     sdk: flutter
 

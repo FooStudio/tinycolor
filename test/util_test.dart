@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 //import 'package:test/test.dart';
-import 'package:tinycolor/util.dart';
+import 'file:///C:/Users/brexm/Personal/projects/tinycolor/lib/src/util.dart';
 
 void main() {
   test("bound01 values", () {
