@@ -2,8 +2,8 @@ import 'dart:math' as Math;
 import 'dart:ui';
 
 import 'package:flutter/painting.dart';
+import 'package:pigment/pigment.dart';
 
-import 'color_from_string.dart';
 import 'conversion.dart';
 import 'hsl_color.dart';
 import 'util.dart';
@@ -33,7 +33,7 @@ class TinyColor {
   }
 
   factory TinyColor.fromString(String string) {
-    return TinyColor(colorFromString(string));
+    return TinyColor(Pigment.fromString(string));
   }
 
   bool isDark() {
