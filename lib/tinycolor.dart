@@ -13,12 +13,11 @@ export 'color_extension.dart';
 
 class TinyColor {
   final Color originalColor;
-  late Color _color;
+  Color _color;
 
-  TinyColor(Color color) : this.originalColor = color {
-    this._color =
-        Color.fromARGB(color.alpha, color.red, color.green, color.blue);
-  }
+  TinyColor(Color color)
+      : this.originalColor = color,
+        _color = color.copy();
 
   factory TinyColor.fromRGB(
       {required int r, required int g, required int b, int a = 100}) {
@@ -157,5 +156,11 @@ class TinyColor {
 
   Color get color {
     return _color;
+  }
+}
+
+extension on Color {
+  Color copy() {
+    return Color.fromARGB(alpha, red, green, blue);
   }
 }
