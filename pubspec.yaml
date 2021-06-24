@@ -1,7 +1,7 @@
-name: tinycolor
+name: tinycolor2
 description: Flutter Color manipulation and conversion, ported from JS tinycolor2
-version: 1.0.3
-homepage: https://github.com/FooStudio/tinycolor
+version: 2.0.0
+homepage: https://github.com/TinyCommunity/tinycolor2
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
