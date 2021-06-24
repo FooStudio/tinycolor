@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tinycolor2/tinycolor.dart';
+import 'package:tinycolor2/tinycolor2.dart';
 
 void main() {
   test(
