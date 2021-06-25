@@ -1,7 +1,7 @@
 import 'package:flutter/painting.dart';
 import 'tinycolor.dart';
 
-/// Extends the Color class to allow direct TinyColor manipulation nativly
+/// Extends the Color class to allow direct TinyColor manipulation natively
 extension TinyColorExtension on Color {
   /// Converts standard Color to TinyColor object
   TinyColor toTinyColor() => TinyColor(this);
