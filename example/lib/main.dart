@@ -1,4 +1,4 @@
-import 'package:example/color_chooser.dart';
+import 'package:example/widgets/color_chooser.dart';
 import 'package:flutter/material.dart';
 
 void main() {
