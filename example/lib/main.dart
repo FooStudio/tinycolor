@@ -30,6 +30,16 @@ class ExamplePage extends StatefulWidget {
 
 class _ExamplePageState extends State<ExamplePage> {
   Color _color = Colors.red;
+  late List<TinyColor> _tinyColors;
+
+  @override
+  void initState() {
+    _initTinyColors();
+    super.initState();
+  }
+
+  _initTinyColors() =>
+      _tinyColors = List.generate(4, (index) => TinyColor(_color));
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +53,10 @@ class _ExamplePageState extends State<ExamplePage> {
             ColorChooser(
               initialColor: _color,
               onColorChange: (color) {
-                setState(() => _color = color);
+                setState(() {
+                  _color = color;
+                  _initTinyColors();
+                });
               },
             ),
             ApplyMethodItem(
@@ -51,10 +64,37 @@ class _ExamplePageState extends State<ExamplePage> {
               defaultValue: 10,
               onButtonPressed: (value) {
                 setState(() =>
-                    _color = TinyColor(_color).lighten(value.toInt()).color);
+                    _tinyColors[0] = _tinyColors[0].lighten(value.toInt()));
               },
-              color: _color,
-            )
+              color: _tinyColors[0].color,
+            ),
+            ApplyMethodItem(
+              name: "brighten",
+              defaultValue: 10,
+              onButtonPressed: (value) {
+                setState(() =>
+                    _tinyColors[1] = _tinyColors[1].brighten(value.toInt()));
+              },
+              color: _tinyColors[1].color,
+            ),
+            ApplyMethodItem(
+              name: "darken",
+              defaultValue: 10,
+              onButtonPressed: (value) {
+                setState(() =>
+                    _tinyColors[2] = _tinyColors[2].darken(value.toInt()));
+              },
+              color: _tinyColors[2].color,
+            ),
+            ApplyMethodItem(
+              name: "tint",
+              defaultValue: 10,
+              onButtonPressed: (value) {
+                setState(
+                    () => _tinyColors[3] = _tinyColors[3].tint(value.toInt()));
+              },
+              color: _tinyColors[3].color,
+            ),
           ],
         ),
       ),
