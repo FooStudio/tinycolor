@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  tinycolor2:
+    path: "../"
 
 
   # The following adds the Cupertino Icons font to your application.
