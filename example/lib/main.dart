@@ -38,16 +38,13 @@ class _ExamplePageState extends State<ExamplePage> {
     super.initState();
   }
 
-  _initTinyColors() =>
-      _tinyColors = List.generate(4, (index) => TinyColor(_color));
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("TinyColor2 Example"),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             ColorChooser(
@@ -61,7 +58,6 @@ class _ExamplePageState extends State<ExamplePage> {
             ),
             ApplyMethodItem(
               name: "lighten",
-              defaultValue: 10,
               onButtonPressed: (value) {
                 setState(() =>
                     _tinyColors[0] = _tinyColors[0].lighten(value.toInt()));
@@ -70,7 +66,6 @@ class _ExamplePageState extends State<ExamplePage> {
             ),
             ApplyMethodItem(
               name: "brighten",
-              defaultValue: 10,
               onButtonPressed: (value) {
                 setState(() =>
                     _tinyColors[1] = _tinyColors[1].brighten(value.toInt()));
@@ -79,7 +74,6 @@ class _ExamplePageState extends State<ExamplePage> {
             ),
             ApplyMethodItem(
               name: "darken",
-              defaultValue: 10,
               onButtonPressed: (value) {
                 setState(() =>
                     _tinyColors[2] = _tinyColors[2].darken(value.toInt()));
@@ -88,16 +82,51 @@ class _ExamplePageState extends State<ExamplePage> {
             ),
             ApplyMethodItem(
               name: "tint",
-              defaultValue: 10,
               onButtonPressed: (value) {
                 setState(
                     () => _tinyColors[3] = _tinyColors[3].tint(value.toInt()));
               },
               color: _tinyColors[3].color,
             ),
+            ApplyMethodItem(
+              name: "shade",
+              onButtonPressed: (value) {
+                setState(
+                    () => _tinyColors[4] = _tinyColors[4].shade(value.toInt()));
+              },
+              color: _tinyColors[4].color,
+            ),
+            ApplyMethodItem(
+              name: "desaturate",
+              onButtonPressed: (value) {
+                setState(() =>
+                    _tinyColors[5] = _tinyColors[5].desaturate(value.toInt()));
+              },
+              color: _tinyColors[5].color,
+            ),
+            ApplyMethodItem(
+              name: "saturate",
+              onButtonPressed: (value) {
+                setState(() =>
+                    _tinyColors[6] = _tinyColors[6].saturate(value.toInt()));
+              },
+              color: _tinyColors[6].color,
+            ),
+            ApplyMethodItem(
+              name: "spin",
+              defaultValue: 10.0,
+              onButtonPressed: (value) {
+                setState(() =>
+                    _tinyColors[7] = _tinyColors[7].spin(value.toDouble()));
+              },
+              color: _tinyColors[7].color,
+            ),
           ],
         ),
       ),
     );
   }
+
+  _initTinyColors() =>
+      _tinyColors = List.generate(8, (index) => TinyColor(_color));
 }

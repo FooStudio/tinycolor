@@ -9,9 +9,9 @@ class ApplyMethodItem extends StatefulWidget {
   const ApplyMethodItem({
     Key? key,
     required this.name,
-    required this.defaultValue,
     required this.onButtonPressed,
     required this.color,
+    this.defaultValue = 10,
   }) : super(key: key);
 
   @override
