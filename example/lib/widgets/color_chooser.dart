@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pigment/pigment.dart';
 
 class ColorChooser extends StatefulWidget {
+  final Color initialColor;
   final Function(Color)? onColorChange;
 
   const ColorChooser({
     Key? key,
+    required this.initialColor,
     this.onColorChange,
   }) : super(key: key);
 
@@ -14,21 +15,21 @@ class ColorChooser extends StatefulWidget {
 }
 
 class _ColorChooserState extends State<ColorChooser> {
-  final List<String> _selectableColors = [
-    "red",
-    "green",
-    "blue",
-    "yellow",
-    "orange",
-    "black",
-    "white",
-    "gray",
-  ];
-  late String _color;
+  final Map<String, Color> _selectableColors = {
+    "red": Colors.red,
+    "green": Colors.green,
+    "blue": Colors.blue,
+    "yellow": Colors.yellow,
+    "orange": Colors.orange,
+    "black": Colors.black,
+    "white": Colors.white,
+    "grey": Colors.grey,
+  };
+  late Color _color;
 
   @override
   void initState() {
-    _color = _selectableColors.first;
+    _color = widget.initialColor;
     super.initState();
   }
 
@@ -39,18 +40,24 @@ class _ColorChooserState extends State<ColorChooser> {
       child: Column(
         children: <Widget>[
           Text("Choose color:"),
-          SizedBox(height: 8),
-          CircleAvatar(backgroundColor: Pigment.fromString(_color)),
-          DropdownButton<String>(
+          DropdownButton<Color>(
             value: _color,
-            items: _selectableColors
-                .map((e) => DropdownMenuItem(child: Text(e), value: e))
+            items: _selectableColors.entries
+                .map((e) => DropdownMenuItem(
+                    child: Row(
+                      children: [
+                        CircleAvatar(backgroundColor: e.value, radius: 12),
+                        SizedBox(width: 8),
+                        Text(e.key),
+                      ],
+                    ),
+                    value: e.value))
                 .toList(),
             onChanged: (value) {
               setState(() {
                 _color = value!;
               });
-              widget.onColorChange?.call(Pigment.fromString(_color));
+              widget.onColorChange?.call(_color);
             },
           ),
         ],

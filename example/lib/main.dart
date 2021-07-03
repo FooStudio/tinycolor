@@ -27,6 +27,8 @@ class ExamplePage extends StatefulWidget {
 }
 
 class _ExamplePageState extends State<ExamplePage> {
+  Color _color = Colors.red;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +38,7 @@ class _ExamplePageState extends State<ExamplePage> {
       body: Center(
         child: Column(
           children: <Widget>[
-            ColorChooser(onColorChange: print),
+            ColorChooser(initialColor: _color, onColorChange: print),
           ],
         ),
       ),
