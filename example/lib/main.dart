@@ -1,5 +1,7 @@
+import 'package:example/widgets/apply_method_item.dart';
 import 'package:example/widgets/color_chooser.dart';
 import 'package:flutter/material.dart';
+import 'package:tinycolor2/tinycolor.dart';
 
 void main() {
   runApp(TinyColorApp());
@@ -38,7 +40,21 @@ class _ExamplePageState extends State<ExamplePage> {
       body: Center(
         child: Column(
           children: <Widget>[
-            ColorChooser(initialColor: _color, onColorChange: print),
+            ColorChooser(
+              initialColor: _color,
+              onColorChange: (color) {
+                setState(() => _color = color);
+              },
+            ),
+            ApplyMethodItem(
+              name: "lighten",
+              defaultValue: 10,
+              onButtonPressed: (value) {
+                setState(() =>
+                    _color = TinyColor(_color).lighten(value.toInt()).color);
+              },
+              color: _color,
+            )
           ],
         ),
       ),
