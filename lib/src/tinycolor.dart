@@ -23,38 +23,30 @@ class TinyColor {
         Color.fromARGB(color.alpha, color.red, color.green, color.blue);
   }
 
-  factory TinyColor.fromRGB(
-      {@required int r, @required int g, @required int b, int a = 100}) {
+  factory TinyColor.fromRGB({
+    @required int r,
+    @required int g,
+    @required int b,
+    int a = 100,
+  }) {
     return TinyColor(Color.fromARGB(a, r, g, b));
   }
 
-  factory TinyColor.fromHSL(HslColor hsl) {
-    return TinyColor(hslToColor(hsl));
-  }
+  factory TinyColor.fromHSL(HslColor hsl) => TinyColor(hslToColor(hsl));
 
-  factory TinyColor.fromHSV(HSVColor hsv) {
-    return TinyColor(hsv.toColor());
-  }
+  factory TinyColor.fromHSV(HSVColor hsv) => TinyColor(hsv.toColor());
 
-  factory TinyColor.fromString(String string) {
-    return TinyColor(Pigment.fromString(string));
-  }
+  factory TinyColor.fromString(String string) => TinyColor(Pigment.fromString(string));
 
-  bool isDark() {
-    return this.getBrightness() < 128.0;
-  }
+  bool isDark() => getBrightness() < 128.0;
 
-  bool isLight() {
-    return !this.isDark();
-  }
+  bool isLight() => !isDark();
 
   double getBrightness() {
     return (_color.red * 299 + _color.green * 587 + _color.blue * 114) / 1000;
   }
 
-  double getLuminance() {
-    return _color.computeLuminance();
-  }
+  double getLuminance() => _color.computeLuminance();
 
   TinyColor setAlpha(int alpha) {
     _color = _color.withAlpha(alpha);
@@ -66,9 +58,7 @@ class TinyColor {
     return this;
   }
 
-  HSVColor toHsv() {
-    return colorToHsv(_color);
-  }
+  HSVColor toHsv() => colorToHsv(_color);
 
   HslColor toHsl() {
     final hsl = rgbToHsl(
@@ -77,12 +67,14 @@ class TinyColor {
       b: _color.blue.toDouble(),
     );
     return HslColor(
-        h: hsl.h * 360, s: hsl.s, l: hsl.l, a: _color.alpha.toDouble());
+      h: hsl.h * 360,
+      s: hsl.s,
+      l: hsl.l,
+      a: _color.alpha.toDouble(),
+    );
   }
 
-  TinyColor clone() {
-    return TinyColor(_color);
-  }
+  TinyColor clone() => TinyColor(_color);
 
   TinyColor lighten([int amount = 10]) {
     final hsl = this.toHsl();
@@ -103,46 +95,49 @@ class TinyColor {
   }
 
   TinyColor darken([int amount = 10]) {
-    final hsl = this.toHsl();
+    final hsl = toHsl();
     hsl.l -= amount / 100;
     hsl.l = clamp01(hsl.l);
     return TinyColor.fromHSL(hsl);
   }
 
-  TinyColor tint([int amount = 10]) {
-    return this.mix(input: Color.fromRGBO(255, 255, 255, 1.0), amount: amount);
-  }
+  TinyColor tint([int amount = 10]) => mix(
+    input: Color.fromRGBO(255, 255, 255, 1.0),
+    amount: amount,
+  );
 
-  TinyColor shade([int amount = 10]) {
-    return this.mix(input: Color.fromRGBO(0, 0, 0, 1.0), amount: amount);
-  }
+  TinyColor shade([int amount = 10]) => mix(
+    input: Color.fromRGBO(0, 0, 0, 1.0),
+    amount: amount,
+  );
 
   TinyColor desaturate([int amount = 10]) {
-    final hsl = this.toHsl();
+    final hsl = toHsl();
     hsl.s -= amount / 100;
     hsl.s = clamp01(hsl.s);
     return TinyColor.fromHSL(hsl);
   }
 
   TinyColor saturate([int amount = 10]) {
-    final hsl = this.toHsl();
+    final hsl = toHsl();
     hsl.s += amount / 100;
     hsl.s = clamp01(hsl.s);
     return TinyColor.fromHSL(hsl);
   }
 
-  TinyColor greyscale() {
-    return desaturate(100);
-  }
+  TinyColor greyscale() => desaturate(100);
 
   TinyColor spin(double amount) {
-    final hsl = this.toHsl();
+    final hsl = toHsl();
     final hue = (hsl.h + amount) % 360;
     hsl.h = hue < 0 ? 360 + hue : hue;
     return TinyColor.fromHSL(hsl);
   }
 
-  TinyColor mix({@required Color input, int amount = 50}) {
+  TinyColor mix({
+    @required Color input,
+    int amount = 50,
+  }) {
     final p = amount / 100.0;
     final color = Color.fromARGB(
         ((input.alpha - _color.alpha) * p + _color.alpha).round(),
@@ -153,12 +148,10 @@ class TinyColor {
   }
 
   TinyColor complement() {
-    final hsl = this.toHsl();
+    final hsl = toHsl();
     hsl.h = (hsl.h + 180) % 360;
     return TinyColor.fromHSL(hsl);
   }
 
-  Color get color {
-    return _color;
-  }
+  Color get color => _color;
 }
