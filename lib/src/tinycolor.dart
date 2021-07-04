@@ -28,9 +28,7 @@ class TinyColor {
     @required int g,
     @required int b,
     int a = 100,
-  }) {
-    return TinyColor(Color.fromARGB(a, r, g, b));
-  }
+  }) => TinyColor(Color.fromARGB(a, r, g, b));
 
   factory TinyColor.fromHSL(HslColor hsl) => TinyColor(hslToColor(hsl));
 
@@ -42,9 +40,7 @@ class TinyColor {
 
   bool isLight() => !isDark();
 
-  double getBrightness() {
-    return (_color.red * 299 + _color.green * 587 + _color.blue * 114) / 1000;
-  }
+  double getBrightness() => (_color.red * 299 + _color.green * 587 + _color.blue * 114) / 1000;
 
   double getLuminance() => _color.computeLuminance();
 
