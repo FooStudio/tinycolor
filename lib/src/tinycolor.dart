@@ -57,12 +57,12 @@ class TinyColor {
   }
 
   TinyColor setAlpha(int alpha) {
-    _color.withAlpha(alpha);
+    _color = _color.withAlpha(alpha);
     return this;
   }
 
   TinyColor setOpacity(double opacity) {
-    _color.withOpacity(opacity);
+    _color = _color.withOpacity(opacity);
     return this;
   }
 
