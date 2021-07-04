@@ -1,4 +1,3 @@
-import 'dart:core';
 import 'dart:math' as Math;
 
 double bound01(double n, double max) {
@@ -9,13 +8,10 @@ double bound01(double n, double max) {
   }
 
   if (max == 360) {
-    n = (n < 0 ? n % max + max : n % max) / max;
+    return (n < 0 ? n % max + max : n % max) / max;
   } else {
-    n = (n % max) / max;
+    return (n % max) / max;
   }
-  return n;
 }
 
-double clamp01(double val) {
-  return Math.min(1.0, Math.max(0.0, val));
-}
+double clamp01(double val) => Math.min(1.0, Math.max(0.0, val));
