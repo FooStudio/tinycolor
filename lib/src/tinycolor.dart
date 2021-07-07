@@ -161,4 +161,17 @@ class TinyColor {
   Color get color {
     return _color;
   }
+
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) ||
+    other is TinyColor &&
+    runtimeType == other.runtimeType &&
+    color == other.color;
+
+  @override
+  int get hashCode => name.hashCode;
+
+  @Deprecated('Use == instead.')
+  bool equals(Object other) => this == other;
 }
