@@ -80,6 +80,8 @@ class TinyColor {
         h: hsl.h * 360, s: hsl.s, l: hsl.l, a: _color.alpha.toDouble());
   }
 
+  String toHex8() => _color.value.toRadixString(16).padLeft(8, '0');
+
   TinyColor clone() {
     return TinyColor(_color);
   }
