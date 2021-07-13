@@ -2,7 +2,6 @@ import 'dart:math' as Math;
 import 'dart:ui';
 
 import 'package:flutter/painting.dart';
-import 'package:meta/meta.dart';
 import 'package:pigment/pigment.dart';
 
 import 'conversion.dart';
@@ -13,18 +12,15 @@ export 'hsl_color.dart';
 export 'color_extension.dart';
 
 class TinyColor {
-  Color originalColor;
+  final Color originalColor;
   Color _color;
 
-  TinyColor(Color color) {
-    this.originalColor =
-        Color.fromARGB(color.alpha, color.red, color.green, color.blue);
-    this._color =
-        Color.fromARGB(color.alpha, color.red, color.green, color.blue);
-  }
+  TinyColor(Color color)
+      : this.originalColor = color,
+        _color = color.clone();
 
   factory TinyColor.fromRGB(
-      {@required int r, @required int g, @required int b, int a = 100}) {
+      {required int r, required int g, required int b, int a = 100}) {
     return TinyColor(Color.fromARGB(a, r, g, b));
   }
 
@@ -57,12 +53,12 @@ class TinyColor {
   }
 
   TinyColor setAlpha(int alpha) {
-    _color.withAlpha(alpha);
+    _color = _color.withAlpha(alpha);
     return this;
   }
 
   TinyColor setOpacity(double opacity) {
-    _color.withOpacity(opacity);
+    _color = _color.withOpacity(opacity);
     return this;
   }
 
@@ -79,6 +75,8 @@ class TinyColor {
     return HslColor(
         h: hsl.h * 360, s: hsl.s, l: hsl.l, a: _color.alpha.toDouble());
   }
+
+  String toHex8() => _color.value.toRadixString(16).padLeft(8, '0');
 
   TinyColor clone() {
     return TinyColor(_color);
@@ -110,11 +108,11 @@ class TinyColor {
   }
 
   TinyColor tint([int amount = 10]) {
-    return this.mix(input: Color.fromRGBO(255, 255, 255, 1.0));
+    return this.mix(input: Color.fromRGBO(255, 255, 255, 1.0), amount: amount);
   }
 
   TinyColor shade([int amount = 10]) {
-    return this.mix(input: Color.fromRGBO(0, 0, 0, 1.0));
+    return this.mix(input: Color.fromRGBO(0, 0, 0, 1.0), amount: amount);
   }
 
   TinyColor desaturate([int amount = 10]) {
@@ -142,13 +140,13 @@ class TinyColor {
     return TinyColor.fromHSL(hsl);
   }
 
-  TinyColor mix({@required Color input, int amount = 50}) {
-    final int p = (amount / 100).round();
+  TinyColor mix({required Color input, int amount = 50}) {
+    final p = amount / 100.0;
     final color = Color.fromARGB(
-        (input.alpha - _color.alpha) * p + _color.alpha,
-        (input.red - _color.red) * p + _color.red,
-        (input.green - _color.green) * p + _color.green,
-        (input.blue - _color.blue) * p + _color.blue);
+        ((input.alpha - _color.alpha) * p + _color.alpha).round(),
+        ((input.red - _color.red) * p + _color.red).round(),
+        ((input.green - _color.green) * p + _color.green).round(),
+        ((input.blue - _color.blue) * p + _color.blue).round());
     return TinyColor(color);
   }
 
@@ -160,5 +158,24 @@ class TinyColor {
 
   Color get color {
     return _color;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TinyColor &&
+          runtimeType == other.runtimeType &&
+          color == other.color;
+
+  @override
+  int get hashCode => color.hashCode;
+
+  @Deprecated('Use == instead.')
+  bool equals(Object other) => this == other;
+}
+
+extension _ on Color {
+  Color clone() {
+    return Color.fromARGB(alpha, red, green, blue);
   }
 }
