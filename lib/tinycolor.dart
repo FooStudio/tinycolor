@@ -17,7 +17,7 @@ class TinyColor {
 
   TinyColor(Color color)
       : this.originalColor = color,
-        _color = color.copy();
+        _color = color.clone();
 
   factory TinyColor.fromRGB(
       {required int r, required int g, required int b, int a = 100}) {
@@ -159,8 +159,8 @@ class TinyColor {
   }
 }
 
-extension on Color {
-  Color copy() {
+extension _ on Color {
+  Color clone() {
     return Color.fromARGB(alpha, red, green, blue);
   }
 }
