@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-//import 'package:test/test.dart';
-import 'package:tinycolor/util.dart';
+import 'package:tinycolor2/tinycolor2.dart';
 
 void main() {
   test("bound01 values", () {
